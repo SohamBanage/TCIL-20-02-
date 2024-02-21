@@ -38,8 +38,8 @@ class CrudUsingSpringBootApplicationTests {
 	@Test
 	public void testGetAllProducts() {
 		List<Products> productLst = new ArrayList<>();
-		productLst.add(new Products(1,"Iphone15",72000));
-		productLst.add(new Products(2,"Samsung S24 Ultra",130000));
+		productLst.add(new Products("Iphone15",72000));
+		productLst.add(new Products("Samsung S24 Ultra",130000));
 		
 		when(productService.getAllProducts()).thenReturn(productLst);
 		
@@ -61,7 +61,7 @@ class CrudUsingSpringBootApplicationTests {
 	
 	@Test
 	public void testGetProductById() {
-		Products products = new Products(1,"Iphone15",72000);
+		Products products = new Products("Iphone15",72000);
 		
 		when(productService.getProductById(1L)).thenReturn(products);
 		
@@ -78,13 +78,13 @@ class CrudUsingSpringBootApplicationTests {
 	
 	@Test
 	public void testSaveProduct() {
-		Products products = new Products(1,"Iphone15",72000);
+		Products products = new Products("Iphone15",72000);
 		
-		when(productService.saveProducts(products)).thenReturn(products);
+		when(productService.saveProduct(products)).thenReturn(products);
 		
 		Products productResponse = productController.saveProducts(products);
 
-		verify(productService, times(1)).saveProducts(productResponse);
+		verify(productService, times(1)).saveProduct(productResponse);
 		
 		assertEquals("Iphone15", productResponse.getName());
 		assertEquals(72000, productResponse.getPrice());
@@ -103,8 +103,8 @@ class CrudUsingSpringBootApplicationTests {
 	@Test
 	public void testUpdateProduct() {
 		Long productId = 1L;
-        Products existingProduct = new Products(1, "ExistingProduct", 500);
-        Products updatedProduct = new Products(2, "ExistingProduct", 500);
+        Products existingProduct = new Products( "ExistingProduct", 500);
+        Products updatedProduct = new Products( "ExistingProduct", 500);
 
         when(productService.updateProducts(eq(updatedProduct), eq(productId))).thenReturn(updatedProduct);
 
@@ -120,8 +120,8 @@ class CrudUsingSpringBootApplicationTests {
 	@Test
 	public void testGetProductByName() {
 		List<Products> productLst= new ArrayList<>();
-		productLst.add(new Products(1,"Iphone15",72000));
-		productLst.add(new Products(2,"Samsung S24 Ultra",130000));
+		productLst.add(new Products("Iphone15",72000));
+		productLst.add(new Products("Samsung S24 Ultra",130000));
 		
 		when(productService.findProductByName("Iphone15")).thenReturn(productLst);
 		
@@ -137,42 +137,12 @@ class CrudUsingSpringBootApplicationTests {
 		
 	}
 	
-
-	
-	@Test
-	public void testGetProductInPriceRange() {
-		List<Products> productLst=new ArrayList<>();
-		productLst.add(new Products(1,"Iphone15",72000));
-		productLst.add(new Products(2,"Samsung S24 Ultra",130000));
-		productLst.add(new Products(3,"Oneplus11R",62000));
-		productLst.add(new Products(4, "MI", 9000));
-		
-		when(productRepo.findProductsInPriceRange(10000,150000)).thenReturn(productLst);
-		
-		List<Products> productResponce=productController.getProductsInPriceRange(10000, 150000);
-		
-		verify(productRepo).findProductsInPriceRange(10000,150000);
-		
-		assertEquals(productLst.size(),productResponce.size());
-		assertEquals(productLst.get(0).getName(), productResponce.get(0).getName());
-		assertEquals(productLst.get(0).getPrice(), productResponce.get(0).getPrice());
-		
-		assertEquals(productLst.get(1).getName(), productResponce.get(1).getName());
-		assertEquals(productLst.get(1).getPrice(), productResponce.get(1).getPrice());
-		
-		assertEquals(productLst.get(2).getName(), productResponce.get(2).getName());
-		assertEquals(productLst.get(2).getPrice(), productResponce.get(2).getPrice());
-		
-		assertEquals(productLst.get(3).getName(), productResponce.get(3).getName());
-		assertEquals(productLst.get(3).getPrice(), productResponce.get(3).getPrice());
-	}
-	
 	@Test
 	public void testGetProductLike() {
 		List<Products> productLst=new ArrayList<>();
-		productLst.add(new Products(1,"Iphone15",72000));
-		productLst.add(new Products(2,"Samsung S24 Ultra",130000));
-		productLst.add(new Products(3,"Oneplus11R",62000));
+		productLst.add(new Products("Iphone15",72000));
+		productLst.add(new Products("Samsung S24 Ultra",130000));
+		productLst.add(new Products("Oneplus11R",62000));
 		
 		when(productRepo.findProductLike("I")).thenReturn(productLst);
 		

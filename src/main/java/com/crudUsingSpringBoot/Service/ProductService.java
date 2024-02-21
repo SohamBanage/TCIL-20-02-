@@ -32,8 +32,8 @@ public class ProductService {
 	}
 	
 	//For Posting The product
-	public Products saveProducts (Products products) {
-		return productRepo.save(products);
+	public Products saveProduct(Products product) {
+	    return productRepo.save(product);
 	}
 	
 	//For Deleting the product
@@ -65,10 +65,6 @@ public class ProductService {
 		return productRepo.findByPrice(price);
 	}
 	
-	//Find the product between particular price
-//	public List<Products>findProductByPriceRange(double minPrice,double maxPrice){
-//		return productRepo.findByPriceBetween(minPrice, maxPrice);
-//	}
 	
 	//For Find the product between particular price
 	public List<Products>findProductByPriceRange(int minPrice,int maxPrice){

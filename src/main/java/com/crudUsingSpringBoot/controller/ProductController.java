@@ -47,10 +47,10 @@ public class ProductController {
 	}
 	
 	//post
-	//POST:http://localhost:8080/products/save
-	@PostMapping("/save")
+	//POST:http://localhost:8080/products/saveproduct
+	@PostMapping("/saveproduct")
 	public Products saveProducts(@RequestBody Products product) {
-		return productService.saveProducts(product);
+		return productService.saveProduct(product);
 	}
 	
 	//Delete
